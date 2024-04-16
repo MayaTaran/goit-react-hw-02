@@ -1,10 +1,12 @@
+import React from 'react';
 import css from "./Feedback.module.css";
-export const Feedback = () => {
+
+export const Feedback = ({updateFeedback }) => {
     return (
       <div>
-            <button >{"good"}</button>
-            <button>{"neutral" }</button>
-            <button>{" bad"}</button>
+            <button onClick={() => updateFeedback('good')} >good</button>
+            <button  onClick={() => updateFeedback('neutral')}>neutral</button>
+            <button onClick={() => updateFeedback('bad')}>bad</button>
             
         </div>
   );
