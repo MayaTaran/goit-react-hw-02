@@ -10,7 +10,7 @@ const App = () => {
   const [clicks, setClicks] = useState(initialClicks);
   
   const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
-  const statistic = Math.round((clicks.good/ totalFeedback) * 100);
+  const positiveFeedbackPercent = Math.round((clicks.good / totalFeedback) * 100);
 
   const updateFeedback = feedbackType => {
     setClicks(prevState => ({
@@ -23,27 +23,29 @@ const App = () => {
     localStorage.setItem('clicks', JSON.stringify(clicks));
   }, [clicks]);
 
- const handleReset = () => {
+  const handleReset = () => {
     setClicks({ good: 0, neutral: 0, bad: 0 });
   };
   
   return (
     <>
       <Description />
-      <Feedback updateFeedback={updateFeedback} />
-       {totalFeedback > 0 && (
+      <Options updateFeedback={updateFeedback} />
+      {totalFeedback > 0 && (
         <button onClick={handleReset}>Reset</button>
       )}
-    <Options
-  good={clicks.good}
-  neutral={clicks.neutral}
-        bad={clicks.bad}
-        total={totalFeedback}
-        stat={statistic}
-  updateFeedback={updateFeedback}
-      />
-      <Notification
-        total={ totalFeedback} />
+      {totalFeedback > 0 ?
+        <Feedback
+          good={clicks.good}
+          neutral={clicks.neutral}
+          bad={clicks.bad}
+          total={totalFeedback}
+          stat={positiveFeedbackPercent}
+          updateFeedback={updateFeedback}
+        />
+        :
+        <Notification
+          total={totalFeedback} />}
     </>
   );
 };
