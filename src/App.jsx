@@ -30,10 +30,10 @@ const App = () => {
   return (
     <>
       <Description />
-      <Options updateFeedback={updateFeedback} />
-      {totalFeedback > 0 && (
-        <button onClick={handleReset}>Reset</button>
-      )}
+      <Options updateFeedback={updateFeedback}
+              totalFeedback={totalFeedback} 
+        handleReset={handleReset} />
+      
       {totalFeedback > 0 ?
         <Feedback
           good={clicks.good}

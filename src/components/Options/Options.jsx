@@ -1,12 +1,14 @@
 import React from 'react';
 
-export const Options = ({updateFeedback }) => {
+export const Options = ({ updateFeedback, totalFeedback, handleReset }) => {
     return (
       <div>
-            <button onClick={() => updateFeedback('good')} >good</button>
-            <button  onClick={() => updateFeedback('neutral')}>neutral</button>
-            <button onClick={() => updateFeedback('bad')}>bad</button>
-            
-        </div>
-  );
+        <button onClick={() => updateFeedback('good')}>Good</button>
+        <button onClick={() => updateFeedback('neutral')}>Neutral</button>
+        <button onClick={() => updateFeedback('bad')}>Bad</button>
+        {totalFeedback > 0 && (
+          <button onClick={handleReset}>Reset</button>
+        )}
+      </div>
+    );
 };
